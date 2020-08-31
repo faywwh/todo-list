@@ -1,0 +1,103 @@
+.container {
+  width: 1100px;
+  margin: 0 auto;
+  border: 1px solid #999;
+  margin-top: 100px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
+}
+
+.header-box {
+  height: 50px;
+}
+
+.header-box .header {
+  height: 50px;
+  background: #000;
+}
+
+.header-box .title {
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: left;
+  padding-left: 50px;
+}
+
+.wrapper .add-task-box {
+  width: 800px;
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper .add-task-box .task-text {
+  width: 400px;
+  height: 30px;
+  outline: none;
+}
+
+.wrapper .add-task-box .task-btn {
+  height: 36px;
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  cursor: pointer;
+}
+
+.wrapper .add-task-box .task-btn:hover {
+  background: #999;
+  border-color: #999;
+  color: #000;
+}
+
+.wrapper .task-box {
+  width: 800px;
+  margin: 0 auto 50px;
+  height: 300px;
+  overflow: auto;
+}
+
+.task-box table,
+tr {
+  border: 1px solid #999;
+  border-collapse: collapse;
+}
+
+.task-box table {
+  width: 100%;
+}
+
+.task-box th {
+  text-align: left;
+}
+
+.task-box td,
+th {
+  padding: 10px 20px;
+}
+
+.task-box .td1 {
+  width: 35%;
+  word-break: break-all;
+}
+
+.task-box .td2 {
+  width: 25%;
+  padding-right: 0;
+}
+
+.task-box .td3 {
+  width: 20%;
+  padding-left: 0;
+}
+
+.task-box .td4 {
+  width: 20%;
+}
+
+.task-box input {
+  outline: none;
+}

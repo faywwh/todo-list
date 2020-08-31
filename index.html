@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>备忘录</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header-box">
+        <div class="header">
+          <div class="title">
+            <span>备忘录</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="wrapper" id="wrapper">
+          <div class="add-task-box">
+            <input type="text" class="task-text" />
+            <button class="task-btn">增加事件</button>
+          </div>
+          <div class="task-box">
+            <table class="task-table">
+              <tr>
+                <th class="td1">事件</th>
+                <th class="td2">提醒时间</th>
+                <th class="td3">设置提醒</th>
+                <th class="td4">删除事件</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/task.js"></script>
+    <script>
+      const task = new Task('#wrapper');
+    </script>
+  </body>
+</html>

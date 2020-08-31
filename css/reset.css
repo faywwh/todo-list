@@ -1,0 +1,9 @@
+html,
+body,
+table,
+th,
+tr,
+td {
+  margin: 0;
+  padding: 0;
+}
