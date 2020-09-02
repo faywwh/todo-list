@@ -26,18 +26,45 @@
           </div>
           <div class="task-box">
             <table class="task-table">
-              <tr>
-                <th class="td1">事件</th>
-                <th class="td2">提醒时间</th>
-                <th class="td3">设置提醒</th>
-                <th class="td4">删除事件</th>
-              </tr>
+              <thead>
+                <tr>
+                  <th class="td1">事件</th>
+                  <th class="td7">描述</th>
+                  <th class="td2">提醒时间</th>
+                  <th class="td3">设置提醒</th>
+                  <th class="td4">删除事件</th>
+                  <th class="td5">事件完成情况</th>
+                  <th class="td6">详情</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
             </table>
           </div>
         </div>
       </div>
     </div>
+    <div class="overlay">
+      <div class="detailArea">
+        <div class="title">标题行</div>
+        <div class="detailText">
+          <textarea
+            name=""
+            id=""
+            cols="40"
+            rows="15"
+            placeholder="请输入详细情况"
+            style="resize: none"
+            autocomplete="off"
+          ></textarea>
+          <div class="btnArea">
+            <button class="confirmBtn">确认</button>
+            <button class="cancelBtn">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="js/task.js"></script>
+
     <script>
       const task = new Task('#wrapper');
     </script>

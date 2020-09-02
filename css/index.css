@@ -54,7 +54,7 @@
 }
 
 .wrapper .task-box {
-  width: 800px;
+  width: 1000px;
   margin: 0 auto 50px;
   height: 300px;
   overflow: auto;
@@ -80,24 +80,85 @@ th {
 }
 
 .task-box .td1 {
-  width: 35%;
   word-break: break-all;
 }
 
+.task-box .td1.active {
+  text-decoration: line-through;
+}
+
+.task-box .td5 {
+  width: 90px;
+}
+
+.task-box .td6 {
+  width: 50px;
+}
+
+.task-box .td7 {
+  width: 150px;
+}
+
+.task-box .taskComplete {
+  background: #666;
+  border: none;
+  color: #fff;
+}
+
 .task-box .td2 {
-  width: 25%;
-  padding-right: 0;
+  width: 100px;
 }
 
 .task-box .td3 {
-  width: 20%;
-  padding-left: 0;
+  width: 70px;
 }
 
 .task-box .td4 {
-  width: 20%;
+  width: 80px;
 }
 
 .task-box input {
   outline: none;
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.overlay .detailArea {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 5px;
+}
+
+.overlay .title {
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  font-weight: 700;
+}
+
+.overlay .detailText {
+  padding: 20px;
+}
+
+.overlay textarea {
+  outline: none;
+}
+
+.overlay .confirmBtn {
+  margin-left: 35%;
 }
