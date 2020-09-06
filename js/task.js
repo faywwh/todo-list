@@ -66,7 +66,7 @@ class Task {
     var setRemindBtn = document.createElement('button');
     var taskComplete = document.createElement('button');
     var detailBtn = document.createElement('button');
-    var timer = null;
+    // var timer = null;
 
     // 添加详情
     var _this = this;
@@ -111,17 +111,28 @@ class Task {
     });
     // 初始化定时任务
     if (item.remindTime && +new Date() < +new Date(item.remindTime)) {
-      timer = setInterval(() => {
+      var timer = setInterval(() => {
         var nowDate = +new Date();
-        if (+new Date(item.remindTime) <= nowDate) {
+        // 事件完成时删除定时时间和定时器
+        if (item.status == 1) {
+          clearInterval(timer);
+          alert('事件已完成！');
+          var time = (this.box.querySelectorAll('.time')[index].value = '');
+          this.taskList[index].remindTime = time;
+          this.localSetItem('todoList', this.taskList);
+        } else if (+new Date(item.remindTime) <= nowDate) {
           clearInterval(timer);
           alert(item.title);
+          var time = (this.box.querySelectorAll('.time')[index].value = '');
+          this.taskList[index].remindTime = time;
+          this.localSetItem('todoList', this.taskList);
         }
       }, 1000);
     }
-    // 事件完成
+    // 事件完成按钮的点击事件
     taskComplete.addEventListener('click', (e) => {
-      var index = e.target.parentNode.parentNode.getAttribute('data-index');
+      var parentNode = e.target.parentNode.parentNode;
+      var index = parentNode.getAttribute('data-index');
       td1.classList.toggle('active');
       taskComplete.classList.toggle('taskComplete');
       if (taskComplete.getAttribute('class') == 'taskComplete') {
@@ -136,6 +147,7 @@ class Task {
     delButton.innerText = '删除事件';
     setRemindBtn.innerText = '设置提醒';
     detailBtn.innerText = '详情';
+    // 事件完成按钮的初始化
     if (item.status == '0') {
       taskComplete.innerText = '未完成';
     } else {
@@ -143,9 +155,9 @@ class Task {
       taskComplete.classList.add('taskComplete');
       td1.classList.add('active');
     }
-    tr.classList.add('tr');
     // tr增加索引
     tr.setAttribute('data-index', index);
+    tr.classList.add('tr');
     td1.classList.add('td1');
     td2.classList.add('td2');
     td3.classList.add('td3');
@@ -190,78 +202,6 @@ class Task {
   }
 
   // 设置提醒
-  // setRemind(event) {
-  //   var parentNode = event.target.parentNode.parentNode;
-  //   var td1Text = parentNode.querySelector('.td1').innerText;
-  //   var nowDate = new Date();
-  //   var time = parentNode.querySelector('.time').value;
-  //   var timeArr = time.trim().split(/[/]|:|[ ]/);
-  //   var inputTime =
-  //     parseInt(timeArr[0]) * 525600 +
-  //     parseInt(timeArr[1]) * 43800 +
-  //     parseInt(timeArr[2]) * 1440 +
-  //     parseInt(timeArr[3]) * 60 +
-  //     parseInt(timeArr[4]);
-  //   var localTime =
-  //     nowDate.getFullYear() * 525600 +
-  //     (nowDate.getMonth() + 1) * 43800 +
-  //     nowDate.getDate() * 1440 +
-  //     nowDate.getHours() * 60 +
-  //     nowDate.getMinutes();
-  //   if (
-  //     timeArr.length != 5 ||
-  //     timeArr[1] > 12 ||
-  //     timeArr[1] < 1 ||
-  //     timeArr[2] > 31 ||
-  //     timeArr[2] < 1 ||
-  //     timeArr[3] > 24 ||
-  //     timeArr[3] < 0 ||
-  //     timeArr[4] > 59 ||
-  //     timeArr[4] < 0 ||
-  //     timeArr[0] == '' ||
-  //     timeArr[1] == '' ||
-  //     timeArr[2] == '' ||
-  //     timeArr[3] == '' ||
-  //     timeArr[4] == ''
-  //   ) {
-  //     alert('输入日期格式错误！正确格式为yyyy/mm/dd xx:xx');
-  //   } else if (inputTime < localTime) {
-  //     alert('设置当前时间错误，请确认输入时间为当前时间之后');
-  //   } else {
-  //     function timeRemind() {
-  //       var nowDate = new Date();
-  //       if (
-  //         timeArr[0] == nowDate.getFullYear() &&
-  //         timeArr[1] == nowDate.getMonth() + 1 &&
-  //         timeArr[2] == nowDate.getDate() &&
-  //         timeArr[3] == nowDate.getHours() &&
-  //         timeArr[4] == nowDate.getMinutes()
-  //       ) {
-  //         clearInterval(timer);
-  //         alert(td1Text);
-  //       }
-  //     }
-  //     var timer = setInterval(timeRemind, 1000);
-  //     var index = parentNode.getAttribute('data-index');
-  //     this.taskList[index].remindTime = time;
-  //     this.localSetItem('todoList', this.taskList);
-  //     alert(
-  //       '已设置提醒时间为：' +
-  //         timeArr[0] +
-  //         '年' +
-  //         timeArr[1] +
-  //         '月' +
-  //         timeArr[2] +
-  //         '日' +
-  //         timeArr[3] +
-  //         '时' +
-  //         timeArr[4] +
-  //         '分'
-  //     );
-  //   }
-  // }
-
-  // 设置提醒
   setRemind(event) {
     var parentNode = event.target.parentNode.parentNode;
     var index = parentNode.getAttribute('data-index');
@@ -269,7 +209,6 @@ class Task {
     var nowDate = +new Date();
     var time = parentNode.querySelector('.time').value;
     var timeStamp = +new Date(time);
-    var timer = null;
     if (isNaN(timeStamp)) {
       alert('输入日期格式错误！正确格式为yyyy/mm/dd xx:xx');
     } else if (timeStamp <= nowDate) {
@@ -279,14 +218,25 @@ class Task {
       alert('已设置提醒时间为：' + time);
       this.taskList[index].remindTime = time;
       this.localSetItem('todoList', this.taskList);
+      var _this = this;
       var timer = setInterval(() => {
         timeRemind(timeStamp);
       }, 1000);
       function timeRemind(remindTime) {
         var nowDate = +new Date();
-        if (remindTime <= nowDate) {
+        // 事件完成时删除定时时间和定时器
+        if (_this.taskList[index].status == 1) {
+          clearInterval(timer);
+          alert('事件已完成！');
+          var time = (parentNode.querySelector('.time').value = '');
+          _this.taskList[index].remindTime = time;
+          _this.localSetItem('todoList', _this.taskList);
+        } else if (remindTime <= nowDate) {
           clearInterval(timer);
           alert(td1Text);
+          var time = (parentNode.querySelector('.time').value = '');
+          _this.taskList[index].remindTime = time;
+          _this.localSetItem('todoList', _this.taskList);
         }
       }
     }
